@@ -1,0 +1,1 @@
+This is a relatively simple calculator library I've programmed, along with two front ends: one using Tkinter, the other as a website that has a flask backend and utilizes Javascript for the interactivity. 
