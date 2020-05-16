@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Calculator</title>
+    <style>
+      body {
+        font-family: monospace;
+        font-size: 16px;
+      }
+
+      #calculator {
+        border: 1px solid black;
+      }
+
+      #expression_field {
+        border: 1px solid black;
+        height: 30px;
+        padding-left: 5px;
+      }
+
+      #calculator td {
+        padding: 10px;
+      }
+
+      #calculator input {
+        width: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="calculator">
+      <tr>
+        <td id="expression_field" colspan="4">Enter an expression</td>
+      </tr>
+      <tr>
+        <td><input id="one" type="button" value="1"/></td>
+        <td><input id="two" type="button" value="2"/></td>
+        <td><input id="three" type="button" value="3"/></td>
+        <td><input id="plus" type="button" value="+"/></td>
+      </tr>
+      <tr>
+        <td><input id="four" type="button" value="4"/></td>
+        <td><input id="five" type="button" value="5"/></td>
+        <td><input id="six" type="button" value="6"/></td>
+        <td><input id="minus" type="button" value="-"/></td>
+      </tr>
+      <tr>
+        <td><input id="seven" type="button" value="7"/></td>
+        <td><input id="eight" type="button" value="8"/></td>
+        <td><input id="nine" type="button" value="9"/></td>
+        <td><input id="multiply" type="button" value="*"/></td>
+      </tr>
+      <tr>
+        <td><input id="zero" type="button" value="0"/></td>
+        <td><input id="enter" type="button" value="="/></td>
+        <td><input id="clear" type="button" value="C"/></td>
+        <td><input id="divide" type="button" value="/"/></td>
+      </tr>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      function press_button(t, b) {
+        $.getJSON('/background_process',{type: t, button: b}, function(data) {
+          document.getElementById("expression_field").innerHTML = data.result;
+        });
+      }
+
+      document.getElementById("one").addEventListener("click", function() {
+        press_button('digit', 1);
+      });
+      document.getElementById("two").addEventListener("click", function() {
+        press_button('digit', 2);
+      });
+      document.getElementById("three").addEventListener("click", function() {
+        press_button('digit', 3);
+      });
+      document.getElementById("four").addEventListener("click", function() {
+        press_button('digit', 4);
+      });
+      document.getElementById("five").addEventListener("click", function() {
+        press_button('digit', 5);
+      });
+      document.getElementById("six").addEventListener("click", function() {
+        press_button('digit', 6);
+      });
+      document.getElementById("seven").addEventListener("click", function() {
+        press_button('digit', 7);
+      });
+      document.getElementById("eight").addEventListener("click", function() {
+        press_button('digit', 8);
+      });
+      document.getElementById("nine").addEventListener("click", function() {
+        press_button('digit', 9);
+      });
+      document.getElementById("zero").addEventListener("click", function() {
+        press_button('digit', 0);
+      });
+
+      document.getElementById("plus").addEventListener("click", function() {
+        press_button('operator', 'plus');
+      });
+      document.getElementById("minus").addEventListener("click", function() {
+        press_button('operator', 'minus');
+      });
+      document.getElementById("multiply").addEventListener("click", function() {
+        press_button('operator', 'multiply');
+      });
+      document.getElementById("divide").addEventListener("click", function() {
+        press_button('operator', 'divide');
+      });
+
+      document.getElementById("enter").addEventListener("click", function() {
+        press_button('enter', 'enter');
+      });
+      document.getElementById("clear").addEventListener("click", function() {
+        press_button('clear', 'clear');
+      });
+    </script>
+  </body>
+</html>
